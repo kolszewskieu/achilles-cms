@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<offers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+<group name="other">
+
+<o id="150" url="http://www.segregatory24.pl/pl/Segregator-dzwigniowy-A4-wklad-30mm.html?file=Konfiguracja-produktu&a=90311&b=90312&id=150&.jpg" 
+price="6.15" avail="7" set="0" weight="0.2" basket="0" stock="10000">
+<cat>
+<![CDATA[Biuro i firma/Biuro/Akcesoria i wyposażenie biurowe/Segregatory i teczki]]>
+</cat>
+<name>
+<![CDATA[Segregator dźwigniowy A4 wkład 30mm]]>
+</name>
+<imgs>
+<main url="http://www.segregatory24.pl/share/public/Obrazki_PL/Produkty/segregatory/segregator_1_big.jpg"/>
+<i url="http://www.segregatory24.pl/share/public/Obrazki_PL/Produkty/segregatory/segregator_1_small.jpg"/>
+</imgs>
+<desc>
+<![CDATA[Matryca monitora wykonana z niezwykle...]]>
+</desc>
+<attrs>
+<a name="Producent">
+<![CDATA[Dell]]>
+</a>
+<a name="Kod_producenta">
+<![CDATA[UB13H]]>
+</a>
+<a name="EAN">
+<![CDATA[142521534124]]>
+</a>
+</attrs>
+</o>
+</group>
+</offers>
