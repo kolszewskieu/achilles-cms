@@ -773,7 +773,8 @@ if (!$SUMMARY_PL[8]) $SUMMARY_PL[8]=$_GET[liczba];
 $document->setValue('amount', $SUMMARY_PL[8]);
 $document->setValue('item_price', $SUMMARY_PL[9]);
 $document->setValue('material', $SUMMARY_PL[10]); // rodzaj tektury
-
+//$document->setValue('freight', $SUMMARY_PL[12]);
+$document->setValue('calc_id', $_GET[wycena_id]);
 $document->setValue('cutter_price', $SUMMARY_PL[11]); // wykrojnik
 $name = 'wycena'.$_SESSION['user_id'].'.docx';
 echo date('H:i:s'), " Generowanie oferty", EOL;
