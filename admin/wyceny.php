@@ -563,7 +563,7 @@ $_KURS=$_GET[kurs];
 						}
 					}					
 				}?>
-				<tr class="warning"><td>14</td><td >Transport</td>
+				
 				    <?
 				    
 				    $_koszt_pln[14]=round(calculate_binders_transport($_GET[liczba]/$liczba_w_opak)*$_KURS["pln/$waluta"],2);
@@ -572,7 +572,7 @@ $_KURS=$_GET[kurs];
                     //$SUMA_PLN+=$_koszt_pln[14];
                     //$SUMA_EUR+=$_koszt_eur[14];
 				    ?>
-				    
+				<tr class="<?if ($_koszt_pln[14]>0) echo 'warning'; else echo 'error' ?>"><td>14</td><td >Transport</td>    
 				    
 				<td colspan="0"><?=$_koszt_eur[14];?></td><td><?=round($_koszt_eur[14]/$_GET[liczba],2);?></td><td><?=$_koszt_pln[14];?></td><td><?=round($_koszt_pln[14]/$_GET[liczba],2);?></td></tr>
 				<tr class="success">
@@ -614,16 +614,30 @@ $_KURS=$_GET[kurs];
 				}elseif(!$_GET[show_wycena_id]){
 				    if ($_GET[przelicz_nowa]==1){
                         unset($_GET[przelicz_nowa]);
-                        $sql="INSERT INTO wyceny (nazwa_klienta,nazwa_zlecenia,szt,koszt_calkowity_eur,koszt_szt_eur,koszt_calkowity_pln,koszt_szt_pln,kurs_eur,parametry,wprow,data_wprow) VALUES ('".$_GET[nazwa_klienta]."','".$_GET[nazwa_zlecenia]."','".$_GET[liczba]."','".round($SUMA_EUR,2)."','".round($SUMA_EUR/$_GET[liczba],2)."','".round($SUMA_PLN,2)."','".round($SUMA_PLN/$_GET[liczba],2)."','".$_KURS["pln/eur"]."','".serialize($_GET)."','".$_SESSION['user_id']."',NOW())";
+                        $sql="INSERT INTO wyceny (nazwa_klienta,nazwa_zlecenia,szt,koszt_calkowity_eur,koszt_szt_eur,koszt_calkowity_pln,koszt_szt_pln,kurs_eur,parametry,wprow,linkp,data_wprow) VALUES ('".$_GET[nazwa_klienta]."','".$_GET[nazwa_zlecenia]."','".$_GET[liczba]."','".round($SUMA_EUR,2)."','".round($SUMA_EUR/$_GET[liczba],2)."','".round($SUMA_PLN,2)."','".round($SUMA_PLN/$_GET[liczba],2)."','".$_KURS["pln/eur"]."','".serialize($_GET)."','".$_SESSION['user_id']."','pricing',NOW())";
                         if (mysql_query($sql)){
-                        header("Location: index.php?site=pricing_list&action=list");
-                        die();
+                            $sql="SELECT MAX(id) FROM wyceny WHERE nazwa_klienta='".$_GET[nazwa_klienta]."' AND nazwa_zlecenia='".$_GET[nazwa_zlecenia]."' AND szt='".$_GET[liczba]."' AND koszt_calkowity_eur='".round($SUMA_EUR,2)."'";
+                            list($wycena_id)=mysql_fetch_row(mysql_query($sql));
+                            $_GET[wycena_id] = $wycena_id;
+                        //header("Location: index.php?site=pricing_list&action=list");
+                        //die();
+                        }
+                        $sql="UPDATE wyceny SET nazwa_klienta='".$_GET[nazwa_klienta]."',nazwa_zlecenia='".$_GET[nazwa_zlecenia]."',szt='".$_GET[liczba]."',koszt_calkowity_eur='".round($SUMA_EUR,2)."',koszt_szt_eur='".round($SUMA_EUR/$_GET[liczba],2)."',koszt_calkowity_pln='".round($SUMA_PLN,2)."',koszt_szt_pln='".round($SUMA_PLN/$_GET[liczba],2)."',kurs_eur='".$_KURS["pln/eur"]."',parametry='".serialize($_GET)."',modyf='".$_SESSION['user_id']."',linkp='pricing' WHERE id='$_GET[wycena_id]'";
+                        if (mysql_query($sql)){
+                            header("Location: index.php?site=pricing_list&action=list");
+                            die();   
                         }
                         }
 					$sql="INSERT INTO wyceny (nazwa_klienta,nazwa_zlecenia,szt,koszt_calkowity_eur,koszt_szt_eur,koszt_calkowity_pln,koszt_szt_pln,kurs_eur,parametry,wprow,data_wprow) VALUES ('".$_GET[nazwa_klienta]."','".$_GET[nazwa_zlecenia]."','".$_GET[liczba]."','".round($SUMA_EUR,2)."','".round($SUMA_EUR/$_GET[liczba],2)."','".round($SUMA_PLN,2)."','".round($SUMA_PLN/$_GET[liczba],2)."','".$_KURS["pln/eur"]."','".serialize($_GET)."','".$_SESSION['user_id']."',NOW())";
 					if(mysql_query($sql)){
 						$sql="SELECT MAX(id) FROM wyceny WHERE nazwa_klienta='".$_GET[nazwa_klienta]."' AND nazwa_zlecenia='".$_GET[nazwa_zlecenia]."' AND szt='".$_GET[liczba]."' AND koszt_calkowity_eur='".round($SUMA_EUR,2)."'";
 						list($wycena_id)=mysql_fetch_row(mysql_query($sql));
+						if ($wycena_id) $_GET[wycena_id] = $wycena_id;
+						$sql="UPDATE wyceny SET nazwa_klienta='".$_GET[nazwa_klienta]."',nazwa_zlecenia='".$_GET[nazwa_zlecenia]."',szt='".$_GET[liczba]."',koszt_calkowity_eur='".round($SUMA_EUR,2)."',koszt_szt_eur='".round($SUMA_EUR/$_GET[liczba],2)."',koszt_calkowity_pln='".round($SUMA_PLN,2)."',koszt_szt_pln='".round($SUMA_PLN/$_GET[liczba],2)."',kurs_eur='".$_KURS["pln/eur"]."',parametry='".serialize($_GET)."',modyf='".$_SESSION['user_id']."',linkp='pricing' WHERE id='$_GET[wycena_id]'";
+						if (mysql_query($sql)){
+                          header("Location: index.php?site=pricing_cbox&action=new&przelicz=1&show_wycena_id=$wycena_id");
+                          die();
+                        }
 						?>
 						<input type="hidden" name="wycena_id" value="<?=$wycena_id;?>">
 					    <div class="alert">
