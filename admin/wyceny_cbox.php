@@ -745,7 +745,7 @@ $_KURS=$_GET[kurs];
 $phpWord = new \PhpOffice\PhpWord\PhpWord();
 $document = $phpWord->loadTemplate('samples/resources/TemplateBox'.$_SESSION['user_id'].'.docx');
 // Variables on different parts of document
-$document->setValue('client', $SUMMARY_PL[1]); 
+$document->setValue('client', $SUMMARY_PL[1]);
 $document->setValue('day', date('d.m.y.')); 
 //$document->setValue('serverName', realpath(__DIR__)); // On header
 if ($SUMMARY_PL[2])

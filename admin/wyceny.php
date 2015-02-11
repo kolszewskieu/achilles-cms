@@ -61,11 +61,12 @@ $_KURS=$_GET[kurs];
 //			<div class="span12">
 
 		?>
-			<?if(!$_GET['print']){?><h3><?SL("valuation_order",$_GET[pricing_lang]);?></h3><?}?>
-			<fieldset>				
+			<?if(!$_GET['print']){?><h3><?SL("valuation_order",$_GET[pricing_lang]);?></h3><?}?> 
+			<fieldset>				<!--  wersja do druku -->
 				<div class="row-fluid">
 					<div class="span6">
 						<legend><?SL("parameters",$_GET[pricing_lang]);?></legend>
+						Wycena Nr <?=$_GET[wycena_id]?>&nbsp;</br>
 						<?SL("type_of_product",$_GET[pricing_lang]);?>&nbsp; <strong><?=$_GET[typ_nazwa]?></strong><br/>
 						<?SL("thickness",$_GET[pricing_lang]);?>&nbsp;<strong><?=$_GET[grubosc]?></strong><br/>
 						<?SL("product_format",$_GET[pricing_lang]);?> &nbsp;<strong><?=$_GET[format_x]?> x <?=$_GET[format_y]?></strong>
@@ -576,7 +577,7 @@ $_KURS=$_GET[kurs];
 				<td colspan="0"><?=$_koszt_eur[14];?></td><td><?=round($_koszt_eur[14]/$_GET[liczba],2);?></td><td><?=$_koszt_pln[14];?></td><td><?=round($_koszt_pln[14]/$_GET[liczba],2);?></td></tr>
 				<tr class="success">
 				<td></td>
-				<td><strong><?SL("sum",$_GET[pricing_lang]);?></strong></td>				
+				<td><strong><?SL("sum",$_GET[pricing_lang]);?><span style="color:#DF7401;"> (poz. 14 &notin; &sum;)</span></strong></td>				
 				<td><strong><?=round($SUMA_EUR,2);?> euro</strong></td>
 				<td><strong><?=round($SUMA_EUR/$_GET[liczba],2);?> euro/<?SL("per_item",$_GET[pricing_lang]);?></strong></td>
 				<td><strong><?=round($SUMA_PLN,2);?> zł</strong></td>
@@ -1119,7 +1120,7 @@ echo getEndingNotes(array('Word2007' => 'docx','PDF' => 'pdf'));
 												if($_GET[typ_foli_wklejka]==$dane[typ_foli_wklejka]){echo " selected ";}
 												echo " value='".$dane[typ_foli_wklejka]."'>".$dane[nazwa]."</option>";
 											}
-											?>
+										?>
 											</select>
 										</label>
 										<?
