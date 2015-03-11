@@ -93,6 +93,7 @@ if($_GET[del_id]){
 								</div>
 										<table class="table table-striped table-hover">
 										<thead align="center">
+											<th nowrap="1">ID</th>
 											<th nowrap="1"><a href="?site=pricing_list&set_wprow=<?=$_GET[set_wprow]?>&set_klient=<?=$_GET[set_klient]?>&sort=nazwa_klienta&sortt=<?=($_GET[sortt]=="DESC"?"ASC":"DESC")?>">Customer</a>
 											<?if($_GET[sort]=="nazwa_klienta" && $_GET[sortt]=="ASC"){?><i class="icon-chevron-up"></i><?}?>
 											<?if($_GET[sort]=="nazwa_klienta" && $_GET[sortt]=="DESC"){?><i class="icon-chevron-down"></i><?}?>
@@ -143,6 +144,7 @@ if($_GET[del_id]){
 										while($dane=mysql_fetch_array($res)){
 											?>
 												<tr>
+												<td><?=$dane[id];?></td>
 												<td><?=$dane[nazwa_klienta];?></td>
 												<td><?=$dane[nazwa_zlecenia];?></td>
 												<td><?=$dane[szt];?></td>

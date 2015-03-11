@@ -18,7 +18,7 @@
 		
 		$body .= '</body></html>';
 		if(mail($recipient, $subject, $body, $headers)){
-		    mail('tomek@usable.pl', $subject, $body, $headers);
+		    //mail('tomek@usable.pl', $subject, $body, $headers);
 		    echo '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">×</button><h5>';
 		    echo 'Mail do uzytkownika został wysłany.';
 		    echo '</h5></div>';

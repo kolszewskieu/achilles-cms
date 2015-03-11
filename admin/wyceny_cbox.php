@@ -236,7 +236,7 @@ $_KURS=$_GET[kurs];
 				<tr><td>4</td><td>
 				<?//Druk Oklejki
 				SL("out_sticker_print",$_GET[pricing_lang]);
-					if($_GET[druk_typ_oklejka] && $_GET[papiero]){
+					if($_GET[druk_typ_oklejka]){
 						echo " (";
 						SL("print_type",$_GET[pricing_lang]);
 						echo "&nbsp;".$_GET[druk_typ_oklejka].")";
@@ -626,7 +626,9 @@ $_KURS=$_GET[kurs];
 								$_koszt_pln[12]=round($_GET[liczba]*$_koszt_pln[12],2);
 								$_koszt_eur[12]=round($_GET[liczba]*$_koszt_eur[12],2);
 							}
-                            if ($val == 'sztancowanie' || $val == 'klejenie' && $_koszt_pln[12]<150) {
+							$valup = strtoupper($val);
+                            if (($valup == 'SZTANCOWANIE' || $valup == 'KLEJENIE') && $_koszt_pln[12]<150)
+							{
                                 $_koszt_pln[12]=150;
                                 $_koszt_eur[12]=$_koszt_pln[12]*$_KURS["eur/pln"];
                             }
@@ -749,7 +751,7 @@ $_KURS=$_GET[kurs];
 					    <div class="alert">
 						<strong><?SL("pricing",$_GET[pricing_lang]);?></strong> <?SL("update",$_GET[pricing_lang]);?>.
 						</div>
-					<?}
+					<?} else {die('Blad zapisu do bazy: ' . mysql_error());}
 				} //zapis nowej kalkulacji
 
                 if(!$_GET['print']){

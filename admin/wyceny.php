@@ -635,7 +635,7 @@ $_KURS=$_GET[kurs];
 						if ($wycena_id) $_GET[wycena_id] = $wycena_id;
 						$sql="UPDATE wyceny SET nazwa_klienta='".$_GET[nazwa_klienta]."',nazwa_zlecenia='".$_GET[nazwa_zlecenia]."',szt='".$_GET[liczba]."',koszt_calkowity_eur='".round($SUMA_EUR,2)."',koszt_szt_eur='".round($SUMA_EUR/$_GET[liczba],2)."',koszt_calkowity_pln='".round($SUMA_PLN,2)."',koszt_szt_pln='".round($SUMA_PLN/$_GET[liczba],2)."',kurs_eur='".$_KURS["pln/eur"]."',parametry='".serialize($_GET)."',modyf='".$_SESSION['user_id']."',linkp='pricing' WHERE id='$_GET[wycena_id]'";
 						if (mysql_query($sql)){
-                          header("Location: index.php?site=pricing_cbox&action=new&przelicz=1&show_wycena_id=$wycena_id");
+                          header("Location: index.php?site=pricing&action=new&przelicz=1&show_wycena_id=$wycena_id");
                           die();
                         }
 						?>

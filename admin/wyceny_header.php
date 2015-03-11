@@ -7,9 +7,9 @@ include('samples/Header.php');
 //require_once 'PhpWord/Autoloader.php';
 //\PhpOffice\PhpWord\Autoloader::register();
 // baza
-$serwer = "localhost:3306";
+$serwer = "sql.uszlachetnia.nazwa.pl:3307";
 $user = "uszlachetnia_4";
-$password = "Nat33ail";
+$password = "WycenA1234";
 $dbase = "uszlachetnia_4";
 // polaczenie do bazy
 $link = mysql_connect($serwer, $user, $password);
